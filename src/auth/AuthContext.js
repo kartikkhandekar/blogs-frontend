@@ -14,12 +14,6 @@ const reducer = (state, action) => {
         case 'LOGOUT' : {
             return {...state, isLoggedIn: false, account: null } 
         }
-        case 'USER' : {
-            return {...state, user: action.payload }
-        }
-        case 'ALL' : {
-            return {...state, blogs:action.payload }
-        }
         default: {
             return {...state} 
         }

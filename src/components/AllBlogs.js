@@ -3,9 +3,12 @@ import { useAuth } from "../auth/AuthContext"
 import { useNavigate } from "react-router-dom"
 import axios from "../config/axios"
 export default function AllBlogs(){
-    const {dispatch}=useAuth()
     const navigate=useNavigate()
     const [blogs,setBlogs]=useState([])
+    const [comment,setComment]=useState(null)
+    const [click,setClick]=useState(false)
+    const [edit,setEdit]=useState(false)
+    const [id,setId]=useState('')
 
     useEffect(()=>{
        const fun=async()=>{
@@ -20,6 +23,15 @@ export default function AllBlogs(){
        fun()
     },[])
 
+    const handleToggle=(id)=>{
+     setClick(!click)
+     setId(id)
+    }
+    
+    const handleSubmit=(e)=>{
+        e.preventDefault()
+    }
+
     return (
         <div>
             <h1>All Blogs</h1>
@@ -30,9 +42,22 @@ export default function AllBlogs(){
                 <h4 key={ele._id}> {ele.title}</h4>
                 <p >{ele.content}</p>
                 <button onClick={()=>{navigate(`/singlepost/${ele._id}`)}}>View</button>
+                <button onClick={()=>{handleToggle(ele._id)}}>{click ? 'Cancel':'Comment'}</button>
                 </>
             )
             })
+        }
+        {
+            click && <form onSubmit={handleSubmit}>
+                <textarea
+                onChange={e=>{setComment(e.target.value)}}>
+
+                </textarea>
+                
+
+                
+            </form>
+            
         }
         </div>
     )

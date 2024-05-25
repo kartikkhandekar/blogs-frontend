@@ -52,7 +52,6 @@ const errors={}
             content:content,
             img:img
         }
-
         
         runValidations()
 
