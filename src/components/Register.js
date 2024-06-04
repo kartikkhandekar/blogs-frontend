@@ -10,7 +10,7 @@ export default function Register({registerIn}){
         email:'',
         password:'',
         bio:'',
-        profilePic:'',
+        profilePicture:'',
         serverErrors:null,
         clientErrors:{}
     })
@@ -38,9 +38,7 @@ export default function Register({registerIn}){
             errors.bio = 'role is required'
         }
 
-        if(form.profilePic.trim().length === 0) {
-            errors.profilePic = 'role is required'
-        }
+        
     }
 
     const handleChange=(e)=>{

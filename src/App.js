@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import axios from './config/axios';
 import { useAuth } from './auth/AuthContext';
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, Bounce,toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import {Link,Routes,Route} from 'react-router-dom'
 import Home from "./components/Home";
@@ -12,6 +12,7 @@ import PrivateRoute from './components/PrivateRoute';
 import AllBlogs from './components/AllBlogs';
 import MyBlogs from './components/Myblogs';
 import SinglePost from './components/SinglePost';
+import Account from './components/Account';
 function App() {
   
   const {user,dispatch}=useAuth()
@@ -48,6 +49,7 @@ function App() {
       {
         user.isLoggedIn ? (
           <>
+          <Link to='/account'>Account</Link>|
           <Link to='/addblogs'>AddBlogs</Link> | 
           <Link to='/myblogs'>MyBlogs</Link> |
           <Link to='/' onClick={()=>{
@@ -80,8 +82,25 @@ function App() {
             <SinglePost/>
           </PrivateRoute>
         }/>
+        <Route path='/account' element={
+          <PrivateRoute>
+            <Account/>
+          </PrivateRoute>
+        }/>
       </Routes>
-      <ToastContainer/>
+      <ToastContainer
+          position="top-center"
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          pauseOnFocusLoss
+          draggable
+          pauseOnHover
+          theme="dark"
+          transition={Bounce}
+          />
     </div>
   );
 }
